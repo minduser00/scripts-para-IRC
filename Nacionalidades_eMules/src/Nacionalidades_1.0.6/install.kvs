@@ -1,12 +1,14 @@
 # Extensión de aviso de nacionalidades de eMules
 # Fué creado para el canal eMule-Spanish irc://irc.mindforge.org:6667/#emule-spanish
 # 04:12 jueves, 4 de abril de 2013 Por Goliat :P
-addon.register("MST_Nacionalidades","1.0.6",$tr("Nacionalidades",MST_Nacionalidades),$tr("Muestra nacionalidades de eMules al unirse a canales",MST_Nacionalidades),"4.0.0","Nacionalidades_eMules_addon.png")
+addon.register("MST_Nacionalidades","1.0.7",$tr("Nacionalidades",MST_Nacionalidades),$tr("Muestra nacionalidades de eMules al unirse a canales",MST_Nacionalidades),"4.0.0","Nacionalidades_eMules_addon.png")
 {
 	# Esta es la rellamada de desinstalación
 	event(OnJoin,Nacionalidades){}
 	event(OnKVIrcStartup,IniciaNacionalidades){}
 	%IdiomasEmule = $hash()
+	# Un mensaje de salida indicando que la desinstalación se ha realizado
+	echo -i=15 La desintalación de la versió 1.0.7 terminó correctamente.
 }
 
 #Obtiene el directorio desde el que se está instalando los archivos

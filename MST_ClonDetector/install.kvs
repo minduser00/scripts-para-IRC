@@ -9,6 +9,7 @@ addon.register("MST_ClonDetector", \
 	# Al ser una version minima no tenemos archivos que desinstalar
 	# Suprimimos el manejador de eventos
 	event(OnJoin,MST_ClonDetector) {}
+	# y decimos adios...
 	echo -i=15 [Mini Clon Detector]: desinstalada la version 1.0.0, Sayonara baby :P
 }
 

@@ -1,0 +1,6 @@
+#	Contenido
+
+Esta carpeta contiene las fuentes e imagenes necesarias para crear el paquete redistribuible (.KVA)
+del addon Nacionalidades_eMules
+Este addon fué creado para el canal de ayuda #eMule-spanish en la red MindForge irc://irc.mindforge.org:6667/#emule-spanish
+Su función es la de indicar el idioma de un eMule que se conecta al canal.

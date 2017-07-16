@@ -1,0 +1,25 @@
+# Mini detector de clones
+# Escrito por LaCosa (alias Exile en MindForge) 1915
+addon.register("MST_ClonDetector", \
+                 "1.0.0", \
+                 "Mini Clon Detector", \
+                 "Detector de clones reducido a su funcionalidad más básica", \
+                 "4.0.0",  ) {
+	# Esta es la rellamada de desinstalación
+	# Al ser una version minima no tenemos archivos que desinstalar
+	# Suprimimos el manejador de eventos
+	event(OnJoin,MST_ClonDetector) {}
+	echo -i=15 [Mini Clon Detector]: desinstalada la version 1.0.0, Sayonara baby :P
+}
+
+# Registramos nuestro manejador de eventos
+event(OnJoin,MST_ClonDetector)
+{
+	// con solo esta linea se buscan los clones del usuario que acaba
+	// de entrar al canal su nick lo tenemos en $0
+	%chanClones = $chan.users( , $mask( $0, 9), )
+	// si %chanClones contiene una coma ',' entonces hay al menos un clon
+	if ( $str.contains( %chanClones, "," )) {
+		echo -i=117 $str.replace(%chanClones, ",", ", ") en $2 posibles clones...
+	}
+}

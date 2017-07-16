@@ -1,0 +1,93 @@
+# Extensión de aviso de nacionalidades de eMules
+# Fué creado para el canal eMule-Spanish irc://irc.mindforge.org:6667/#emule-spanish
+# 04:12 jueves, 4 de abril de 2013 Por Goliat :P
+addon.register("MST_Nacionalidades","1.0.6",$tr("Nacionalidades",MST_Nacionalidades),$tr("Muestra nacionalidades de eMules al unirse a canales",MST_Nacionalidades),"4.0.0","Nacionalidades_eMules_addon.png")
+{
+	# Esta es la rellamada de desinstalación
+	event(OnJoin,Nacionalidades){}
+	event(OnKVIrcStartup,IniciaNacionalidades){}
+	%IdiomasEmule = $hash()
+}
+
+#Obtiene el directorio desde el que se está instalando los archivos
+%origen = $file.extractPath($0)
+# Instala archivos
+addon.installfiles -s MST_Nacionalidades pics %origen/"pics/Nacionalidades_eMules_addon.png"
+
+#Instala eventos
+event(OnKVIrcStartup,IniciaNacionalidades)
+{
+	# Inicializa el diccionario de nacionalidades cuando KVIrc se abre
+	# El diccionario está ordenado por probabilidad de entrada en #emule-spanish ;)
+	global %IdiomasEmule
+	%IdiomasEmule = $hash(\
+	1034,$k(1,4)Es$k(1,8)pañ$k(1,13)ol$k - España\(alfabetización tradicional\),\
+	1033,$k(1,12)In$k(1,4)g$k(1,0)l$k(1,4)é$k(1,0)s$k \(Estados Unidos\),\
+	1027,$k(1,8)C$k(1,4)a$k(1,8)t$k(1,4)a$k(1,8)l$k(1,4)á$k(1,8)n$k,\
+	2306,$k(8,12)Va$k(1,4)l$k(1,8)e$k(1,4)n$k(1,8)c$k(1,4)i$k(1,8)a$k(1,4)n$k(1,8)o$k,\
+	2307,$k(8,12)Va$k(1,4)l$k(1,8)e$k(1,4)n$k(1,8)c$k(1,4)i$k(1,8)a$k(1,4)n$k(1,8)o$k \(RACV\),\
+	1110,$k(12,0)Gallego$k,\
+	2305,$k(8,12)Asturiano$k,\
+	1046,$k(12,9)Po$k(12,8)rtugu$k(12,9)és$k \(Brasil\),\
+	2070,$k(4,3)Port$k(3,4)ugués$k \(Portugal\),\
+	1040,$k(1,9)Ita$k(1,0)lia$k(1,4)no$k \(Italia\),\
+	1036,$k(1,12)Fr$k(1,0)anc$k(1,4)és$k \(Francia\),\
+	1026,$k(1,0)Bul$k(1,9)ga$k(1,4)ro$k,\
+	1028,$k(0,12)C$k(1,4)hino$k \(Taiwán\),\
+	1029,$k(1,12)C$k(1,0)he$k(1,4)co$k,\
+	1030,$k(0,4)Danés$k,\
+	1031,$k(4,1)Al$k(1,4)em$k(1,8)án$k \(Alemania\),\
+	1032,$k(0,12)G$k(12,0)r$k(0,12)i$k(12,0)e$k(0,12)g$k(12,0)o$k,\
+	1035,$k(12,0)Finlandés$k,\
+	1037,Hebreo,\
+	1038,$k(1,4)Hú$k(1,0)nga$k(1,9)ro$k,\
+	1041,$k(1,0)Jap$k(4)o$k(1)nés$k,\
+	1042,$k(0,12)Co$k(0,4)rea$k(0,12)no$k,\
+	1043,$k(0,4)Ho$k(1,0)lan$k(0,12)dés$k,\
+	1044,$k(12,4)Nor$k(12,0)u$k(12,4)ego$k \(Bokmal\),\
+	1045,$k(4,0)Pol$k(0,4)aco$k,\
+	1048,$k(8,12)Ru$k(12,8)ma$k(8,4)no$k,\
+	1049,$k(12,0)_R$k(0,12)us$k(12,4)o_$k,\
+	1052,$k(1,4)Alb$k(4,1)an$k(1,4)és$k,\
+	1053,$k(8,12)Su$k(12,8)e$k(8,12)co$k,\
+	1055,$k(0,4)Turco$k,\
+	1058,$k(8,12)Ucra$k(12,8)niano$k,\
+	1060,$k(12,0)Esl$k(0,12)ove$k(12,4)no$k,\
+	1061,$k(0,12)Es$k(0,1)to$k(12,0)nio$k,\
+	1062,$k(0,4)Le$k(4,0)t$k(0,4)ón$k,\
+	1063,$k(3,8)Lit$k(8,3)ua$k(3,4)no$k,\
+	1065,$k(0,9)Pe$k(4,0)rs$k(0,4)a$k(4)_$k,\
+	1066,$k(8,4)Vietnamita$k,\
+	1069,$k(0,3)V$k(0,4)a$k(1,0)s$k(0,4)c$k(0,3)o$k,\
+	1082,$k(12,0)Mal$k(0,4)tés$k,\
+	1150,$k(0,1)B$k(1,0)r$k(0,1)e$k(1,0)t$k(0,1)ó$k(1,0)n$k \(Brezhoneg\),\
+	1433,$k(1,4)Ar$k(0,3)a$k(1,0)b$k(0,1)e$k \(E.A.U\),\
+	2052,$k(8,4)Chino$k \(RPC\),\
+	2068,$k(0,4)Nor$k(0,12)u$k(0,4)ego$k \(Nynorsk\))
+}
+
+# Disparamos el evento OnKVIrcStartup:IniciaNacionalidades para iniciar el diccionario sin reiniciar Kvirc
+eventctl OnKVIrcStartup IniciaNacionalidades
+
+# Registramos el evento
+event(OnJoin,Nacionalidades)
+{
+	# Aviso nacionalidad eMules:
+	#	$1 = username
+	# Variables definidas en el evento OnKVIrcStartup IniciaNacionalidades:
+	#	%IdiomasEmule : Diccionario global contiene códigos y nombres de idiomas
+
+	# El código del idioma son los 4 primeros digitos de username
+	%codigoIdioma = $str.left($1,4);
+	# Buscamos primero la lengua mayoritaria del canal para ahorrar tiempo
+	if(!$str.cmp("1034",%codigoIdioma)){
+		# Es anodino mostrar siempre avisos de la entrada de eMules de la lengua del canal
+		# Si lo prefieres así, retira el # de la linea siguiente 
+		#echo -i=114 "Ha entrado un eMule $k(1,4)Es$k(1,8)pañ$k(1,6)ol$k()";
+	} else {
+		%temp = %IdiomasEmule{%codigoIdioma}
+		if(%temp){
+			echo -i=114 "0_0 ha entrado un eMule "%temp
+		}
+	}
+}

@@ -1,11 +1,11 @@
 alias(hora) {
 	# Escribe la hora actual en la ventana
-	%hora = $date("H:M:S - A d")" de "$date("B")" de "$date("Y");
-	if (!$0) 	{
+	%hora = $date("H:M:S$k(1) - $k(0)A d")" de "$date("B")" de "$date("Y");
+	if (!$0){
 		echo %hora
-	} elseif ($0 == "c") {
-		say "$k(8,3)Son las "$k(10,5)%hora
+	} elseif ($0 == "c"){
+		say $k(0,10)"Son las "%hora
 	} else {
-		say $0$option(stringNickCompletionPostfix)$1-" "%hora
+		say $k(0,7)$0$option(stringNickCompletionPostfix)$k(0,12)$1-" "%hora
 	}
 }

@@ -1,0 +1,50 @@
+# Envia a la consola los mensajes resaltados que contengan tu nick
+# versión recortada
+# Escrito por Exile en MindForge (alias LaCosa (freenode))
+# vie 14 jul 2017 21:17:16 
+
+# Esta función de registro de nuestro addon, tiene que estar al principio, porque no se
+# debe instalar nada hasta que KVIrc comprueve la version
+addon.register("KVIrcAutoEnvioEstado", \
+		"1.0.6", \
+		"Auto envio a consola", \
+		"Reenvia a consola mensajes con tu nick", \
+		"4.0.0", \
+		"" ) {
+	# Esta es la rellamada de desinstalación KVIrc la ejecutará cuando desinsales esta extensión
+
+	# Suprimimos los manejadores de eventos
+	event(OnHighlight,EnviarAEstado) {}
+
+	# y decimos adios
+	echo -i=15 [Auto envio a consola]: desinstalada la version 1.0.6, Sayonara... baby :P
+}
+
+# Aquí comienza la instalación
+
+#Obtiene el directorio desde el que se está instalando los archivos
+%origen = $file.extractPath($0)
+
+# Instala el unico archivo una imagen png, usamos el metodo moderno, KVIrc se ocupará
+# de desinstalarlo por nosotros si desinstalas o actualizas este addon.
+//addon.installfiles -s KVIrcAutoJOps pics %origen"/pics/KVIrcAutoEnvioEstado.png"
+
+# Creamos el manejador de eventos  (event handler)
+
+# Evento que repite los mensajes y acciones con tu nick, en estado
+event(OnHighlight,EnviarAEstado)
+{
+	if ($str.equal($4,$me)){
+		%temp=$target
+		rebind $console;
+		if (%EnviarAEstadoEnCanal!=%temp){
+			%EnviarAEstadoEnCanal=%temp;
+			echo -i=115 $k(9,1)"---->" $k(4,1)$b%temp $b;
+		}
+		if ($6){
+			echo -i=$msgtype(Action) $0 $3;
+		} else {
+			echoprivmsg -i=$msgtype(Highlight) -n $0 $1 $2 $3;
+		}
+	}
+}
